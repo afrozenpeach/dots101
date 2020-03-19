@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
+import { Obituary } from '../obituaries.types';
 
 @Component({
   selector: 'app-obituary',
@@ -7,20 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ObituaryComponent implements OnInit {
 
-  name;
-  age = 69;
-  obituaryText;
+  @Input() obituary: Obituary;
 
   constructor() {
-    this.createObituary('Bob Weedhead', 'They died. The end.');
    }
 
   ngOnInit(): void {
-  }
-
-  createObituary(inputName, inputObituaryText) {
-    this.name = inputName;
-    this.obituaryText = inputObituaryText;
   }
 
 }
