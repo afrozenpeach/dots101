@@ -1,1 +1,4 @@
-<app-obituary *ngFor="let o of obituaries" [obituary]="o"></app-obituary>
+<ng-container *ngFor="let o of obituaries">
+    <a href="obituaries/{{o.slug}}">{{o.name}}</a>
+    <br/>
+</ng-container>

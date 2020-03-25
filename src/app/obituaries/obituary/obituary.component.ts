@@ -1,5 +1,6 @@
 import { Component, OnInit, Input} from '@angular/core';
-import { Obituary } from '../obituaries.types';
+import { Obituary, Obituaries } from '../obituaries.types';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-obituary',
@@ -8,12 +9,22 @@ import { Obituary } from '../obituaries.types';
 })
 export class ObituaryComponent implements OnInit {
 
-  @Input() obituary: Obituary;
+  slug: string;
+  obituary: Obituary;
 
-  constructor() {
-   }
+  constructor(private route: ActivatedRoute) {  
+  }
 
   ngOnInit(): void {
+    this.route.params.subscribe(p => {
+      this.slug = p['slug'];
+
+      Obituaries.forEach(o => {
+        if (o.slug === this.slug) {
+          this.obituary = o;
+        }
+      })
+    })
   }
 
 }

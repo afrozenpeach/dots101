@@ -1,17 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ObituaryComponent } from './obituary/obituary.component';
 import { ObituaryContainerComponent } from './obituary-container/obituary-container.component';
+import { Routes, RouterModule } from '@angular/router';
 
-
+const obituaryRoutes: Routes = [
+  { path: '', component: ObituaryContainerComponent, pathMatch: 'full' },  
+  {
+    path: ':slug',
+    loadChildren: () => import('./obituary/obituary.module').then(m => m.ObituaryModule)
+  }
+]
 
 @NgModule({
-  declarations: [ObituaryComponent, ObituaryContainerComponent],
+  declarations: [ObituaryContainerComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule.forChild(obituaryRoutes)
   ],
   exports: [
-    ObituaryComponent,
     ObituaryContainerComponent
   ]
 })
